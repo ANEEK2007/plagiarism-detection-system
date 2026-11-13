@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plagiarism Report</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>Plagiarism <span>Detector</span></h2>
+        <p>Analysis Report</p>
+    </nav>
+
+    <div class="container">
+
+        <div class="heading">
+            <h1>Plagiarism Detection Report</h1>
+            <p>File Name: {{ filename }}</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Highest Similarity</h3>
+
+                <h1>
+                    {{ "%.2f"|format(
+                        results[0].similarity if results else 0
+                    ) }}%
+                </h1>
+                
+            </div>
+
+            <div class="card">
+                <h3>Reference Documents Compared</h3>
+
+                <h1>{{ results|length }}</h1>
+            </div>
+
+        </div>
+
+        <h2 style="margin-top:35px;">
+            Similarity Analysis
+        </h2>
+
+        <table class="result-table">
+
+            <tr>
+                <th>Document Name</th>
+                <th>Similarity</th>
+            </tr>
+            <a href="{{ url_for('download_report', report_name=report_name) }}"
+class="file-label">
+    Download PDF Report
+</a>
+            {% for result in results %}
+
+            <tr>
+                <td>{{ result.filename }}</td>
+
+                <td>{{ result.similarity }}%</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <h2 style="margin-top:35px;">
+            Extracted Text
+        </h2>
+
+        <div class="card" style="margin-top:15px;">
+            <pre style="white-space:pre-wrap;">{{ extracted_text }}</pre>
+        </div>
+
+        <br>
+
+        <a href="/">Upload Another Document</a>
+
+    </div>
+
+    <footer class="footer">
+        Plagiarism Detection System | Academic Project
+    </footer>
+
+</body>
+
+</html>

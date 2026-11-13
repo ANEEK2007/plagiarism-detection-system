@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plagiarism Detection System</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>Plagiarism <span>Detector</span></h2>
+        <p>Document Analysis System</p>
+    </nav>
+
+    <div class="container">
+
+        <div class="heading">
+            <h1>Welcome to Plagiarism Detector</h1>
+
+            <p>
+                Upload your document and analyze its similarity
+                with existing reference documents.
+            </p>
+        </div>
+
+        <div class="upload-box">
+
+            <h2>Upload Your Document</h2>
+
+            <p>Supported formats: PDF, DOCX, TXT</p>
+
+            <form action="/" method="POST"
+                enctype="multipart/form-data">
+
+                <div class="upload-box">
+    <label for="file-upload" class="file-label">
+        📁 Choose Your Document
+    </label>
+
+    <input
+        type="file"
+        id="file-upload"
+        name="file"
+        accept=".pdf,.docx,.txt"
+        required
+    >
+
+    <p id="file-name">No file selected</p>
+</div>
+                <br>
+
+                <button type="submit">
+                    Check Plagiarism
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        Plagiarism Detection System | Academic Project
+    </footer>
+
+    <script>
+    document.getElementById("file-upload").addEventListener("change", function() {
+        const fileName = this.files[0]
+            ? this.files[0].name
+            : "No file selected";
+
+        document.getElementById("file-name").textContent = fileName;
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+Flask
+Werkzeug
+scikit-learn
+nltk
+pypdf
+python-docx
+reportlab
+gunicorn
